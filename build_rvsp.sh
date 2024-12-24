@@ -131,20 +131,19 @@ if [[ "$option" == "6" || "$option" == "8" ]]; then
     original_dir=$(pwd)
     
     if [[ ! -d "$WORKSPACE/qemu" ]]; then  
-        git clone https://github.com/AII-SDU/qemu.git || { echo "Failed to clone qemu"; exit 1; }  
+        git clone -b qemu-rv64-server-platfrom --single-branch https://github.com/AII-SDU/qemu.git "$WORKSPACE/qemu"     || { echo "Failed to clone qemu"; exit 1; }  
     fi
     
     cd "$WORKSPACE/qemu" || { echo "Failed to enter qemu directory"; exit 1; }
-    
-    #Switch to target branch
-    git checkout -b qemu-rv64-server-platfrom origin/qemu-rv64-server-platfrom
-    
-    ./configure --disable-werror --target-list=riscv64-softmmu
+
+    mkdir $WORKSPACE/qemu/build
+    cd "$WORKSPACE/qemu/build"
+    $WORKSPACE/qemu/configure --disable-werror --target-list=riscv64-softmmu
     
     # Temporarily set to not exit, to capture errors.
     set +e
     make -j $(nproc) || { echo "Failed to compile QEMU"; }
-    set -e # Restore error checking
+    set -e # Restore error checkinge
     
     echo "QEMU compile complete."
     cd "$original_dir" || { echo "Failed to return to the original directory"; exit 1; } 
@@ -170,7 +169,7 @@ if [[ "$option" == "9" || "$option" == "8" ]]; then
     truncate -s 32M $QEMU_IMG_RUN/Build/RiscVQemuServerPlatform/DEBUG_GCC5/FV/RISCV_SP_VARS_32M.fd  
     
     # Run QEMU  
-    /mnt/hdd/finsh/Qemu-rvsp/qemu/build/qemu-system-riscv64 \
+    $WORKSPACE/qemu/build/qemu-system-riscv64 \
         -nographic -m 8G -smp 32 \
         -machine rvsp-ref,pflash0=pflash0,pflash1=pflash1 \
         -blockdev node-name=pflash0,driver=file,read-only=on,filename=$QEMU_IMG_RUN/Build/RiscVQemuServerPlatform/DEBUG_GCC5/FV/RISCV_SP_CODE_32M.fd \
