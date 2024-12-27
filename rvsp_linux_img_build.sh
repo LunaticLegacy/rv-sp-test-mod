@@ -25,7 +25,7 @@ trap 'exception_handler ${LINENO} "$BASH_COMMAND" $?' ERR
 PROJECT_ROOT="$(pwd)"  
 CLONE_DIR="$PROJECT_ROOT/rvsp-linux-img"  
 OUTPUT_DIR="$PROJECT_ROOT/rvsp-linux-img/output"  
-PLATDIR_DIR="$PROJECT_ROOT/image_output"  # Example output directory  
+PLATDIR_DIR="$PROJECT_ROOT/rvsp-linux-img/image_output"  # Example output directory  
 
 # Default configuration  
 LINUX_ARCH="riscv"  
