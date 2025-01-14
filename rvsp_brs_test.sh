@@ -10,7 +10,7 @@ build_sct ()
 
   #mkdir rvsp-brs-test
 
-  #truncate -s 32M $WORKSPACE/Build/RiscVQemuServerPlatform/DEBUG_GCC5/FV/RISCV_SP_CODE_32M.fd  
+  #truncate -s 32M $WORKSPACE/Build/RiscVQemuServerPlatform/DEBUG_GCC5/FV/RISCV_SP_CODE_32M.fd
   #truncate -s 32M $WORKSPACE/Build/RiscVQemuServerPlatform/DEBUG_GCC5/FV/RISCV_SP_VARS_32M.fd
 
   cd "$WORKSPACE/rvsp-brs-test" || { echo "Failed to enter rvsp-brs-test directory"; }
@@ -23,8 +23,8 @@ build_sct ()
 
   SCTWORKSPACE="$(pwd)"
 
-  echo 
-  echo 
+  echo
+  echo
   echo "-------------------------------------"
   echo         "Get Resources We Need"
   echo "-------------------------------------"
@@ -44,8 +44,8 @@ build_sct ()
 
   #build sct
   #Define necessary path
-  echo 
-  echo 
+  echo
+  echo
   echo "-------------------------------------"
   echo           "Build SCT test"
   echo "-------------------------------------"
@@ -283,24 +283,24 @@ package_sct ()
 
 run_sct ()
 {
-  echo "Start SCT Test..." 
+  echo "Start SCT Test..."
 
-  WORKSPACE="$(pwd)"  
+  WORKSPACE="$(pwd)"
   original_dir="$(pwd)"
 
   cp -r $WORKSPACE/qemu $WORKSPACE/rvsp-brs-test/TEST
-  
+
   #convert .fd files into 32M
-  truncate -s 32M $WORKSPACE/Build/RiscVQemuServerPlatform/DEBUG_GCC5/FV/RISCV_SP_CODE.fd  
+  truncate -s 32M $WORKSPACE/Build/RiscVQemuServerPlatform/DEBUG_GCC5/FV/RISCV_SP_CODE.fd
   truncate -s 32M $WORKSPACE/Build/RiscVQemuServerPlatform/DEBUG_GCC5/FV/RISCV_SP_VARS.fd
 
   #copy .fd files to run dir
-  cp $WORKSPACE/Build/RiscVQemuServerPlatform/DEBUG_GCC5/FV/RISCV_SP_CODE.fd $WORKSPACE/rvsp-brs-test/TEST  
+  cp $WORKSPACE/Build/RiscVQemuServerPlatform/DEBUG_GCC5/FV/RISCV_SP_CODE.fd $WORKSPACE/rvsp-brs-test/TEST
   cp $WORKSPACE/Build/RiscVQemuServerPlatform/DEBUG_GCC5/FV/RISCV_SP_VARS.fd $WORKSPACE/rvsp-brs-test/TEST
 
   cd rvsp-brs-test/TEST
 
-  QEMU_IMG_RUN="$(pwd)"  
+  QEMU_IMG_RUN="$(pwd)"
 
   #copy brs_live_img we compiled to run dir
   cp $original_dir/rvsp-brs-test/output/brs_live_image.img $QEMU_IMG_RUN
@@ -309,12 +309,12 @@ run_sct ()
   mv RISCV_SP_CODE.fd RISCV_SP_CODE_32M.fd
   mv RISCV_SP_VARS.fd RISCV_SP_VARS_32M.fd
 
-  if [[ ! -f $QEMU_IMG_RUN/RISCV_SP_CODE_32M.fd || ! -f $QEMU_IMG_RUN/RISCV_SP_VARS_32M.fd ]]; then  
-      echo "error: Can't find .fd files, run the compilation steps to generate them."  
-      #exit 1  
-  fi   
-    
-  # Run QEMU  
+  if [[ ! -f $QEMU_IMG_RUN/RISCV_SP_CODE_32M.fd || ! -f $QEMU_IMG_RUN/RISCV_SP_VARS_32M.fd ]]; then
+      echo "error: Can't find .fd files, run the compilation steps to generate them."
+      #exit 1
+  fi
+
+  # Run QEMU
   $QEMU_IMG_RUN/qemu/build/qemu-system-riscv64 \
       -nographic -m 8G -smp 32 \
       -machine rvsp-ref,pflash0=pflash0,pflash1=pflash1 \
@@ -323,7 +323,7 @@ run_sct ()
       -bios $QEMU_IMG_RUN/fw_dynamic.bin \
       -drive file=$QEMU_IMG_RUN/brs_live_image.img,if=ide,format=raw
       #-device qemu-xhci \
-      #-device virtio-rng-pci   
+      #-device virtio-rng-pci
 }
 
 echo "Please choose the step to execute from the following options:"
@@ -334,19 +334,19 @@ echo "4. Execute all"
 read -p "Please enter an option (1-4): " option
 
 #build SCT test
-if [[ "$option" == "1" || "$option" == "4" ]]; then  
+if [[ "$option" == "1" || "$option" == "4" ]]; then
     echo "Step 1: Building SCT test..."
     build_sct
 fi
 
 #package SCT test
-if [[ "$option" == "2" || "$option" == "4" ]]; then  
+if [[ "$option" == "2" || "$option" == "4" ]]; then
     echo "Step 2: Packaging SCT test..."
     package_sct
 fi
-    
+
 #run SCR resr on QEMU
-if [[ "$option" == "3" || "$option" == "4" ]]; then  
+if [[ "$option" == "3" || "$option" == "4" ]]; then
     echo "Step 3: Running SCT test..."
     run_sct
 fi

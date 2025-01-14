@@ -14,17 +14,17 @@ The scripts include three components:
 
 ![alt text](image/image.png)
 
-## How To Build：
+## How To Build:
 Download the rv-sp-test-mod repository enter this directory:  
 
         git clone https://github.com/AII-SDU/rv-sp-test-mod.git  
         cd rv-sp-test-mod
 
-Run build_rvsp.sh，starting to build components you need：
+Run build_rvsp.sh,starting to build components you need
 
         . build_rvsp.sh  
 
-There are 8 choices in this script：
+There are 8 choices in this script:
 
 1) Clone edk2 and edk2-platform
 
