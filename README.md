@@ -1,5 +1,6 @@
 # rv-sp-test-mod
 
+**This is a forking repo via: 月と猫 - LunaNeko. Please read [What had I done.md](What%20had%20I%20done.md) instead for detailed info of my work.**
 
 ## Overview
 
@@ -10,7 +11,6 @@ The scripts include three components:
 2. Compile the RISC-V Linux image file.
 3. Compile the RV-BRS test and conduct BRS-I standard testing (currently only includes the SCT portion).
 
-**This is a forking repo via: 月と猫 - LunaNeko. Please read [What had I done.md](What%20had%20I%20done.md) instead for detailed info of my work.**
 
 ## Introduction
 
