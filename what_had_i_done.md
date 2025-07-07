@@ -7,6 +7,9 @@
 
 ## How to use the provided .img file?
 
-- username: `root`, password: `LaLuna`.
+1. Build QEMU via method provided in file `[rvsp_linux_img_build.sh](rvsp_linux_img_build.sh)`.
+2. Run my command in `[qemu_run.sh](qemu_run.sh)`.
+
+- Login within: username: `root`, password: `LaLuna`.
 - This .img file is still WIP and the functions in the released file was **STILL NOT** fit for release version of a real OS.
 - I'm now about to add something including GCC compiler and dnf package manager into this and find an installer for this OS.
