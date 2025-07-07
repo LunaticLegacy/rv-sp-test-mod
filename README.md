@@ -1,6 +1,6 @@
 # rv-sp-test-mod
 
-**This is a forking repo via: 月と猫 - LunaNeko. Please read [THIS](what-had-i-done.md) instead for detailed info of my work.**
+**This is a forking repo via: 月と猫 - LunaNeko. Please read [THIS](what_had_i_done.md) instead for detailed info of my work.**
 
 ## Overview
 
