@@ -1,5 +1,5 @@
 # rv-sp-test-mod
-
+This is a forking repo via: 月と猫 - LunaNeko. Please go to [ANOTHER BRANCH](https://github.com/LunaticLegacy/rv-sp-test-mod/tree/lunanekos_working) instead for detailed info of my work.
 
 ## Overview
 
