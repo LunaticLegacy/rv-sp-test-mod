@@ -6,6 +6,7 @@
 
 - (2025/7/14) Finished the process of using `virt` device for running qemu tree. *I finally understood that I should set my CPU to `max` to activate all the expansion modules for a feature of expansion module driver in my kernel was enabled as a part of my kernel (and not module).*
 - (2025/7/14 amend) Also, transferred format `gpio` into `ext4` and solved the problem of driver, which enables me to keep any of my editing of the filesystem permanently. *So I can install my utils without re-pack a new `.gpio` file.*
+- （2025.7/15）Successfully adjusted OCS rootfs into my boot chain.
 
 ## Overview
 
